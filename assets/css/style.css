@@ -283,19 +283,21 @@ footer {
 #header nav.navbar-light .navbar-toggler.opened span:last-child {
   transform: rotate(-45deg);
 }
-#header nav ul.dropdown-menu[data-bs-popper] {
+#header nav ul.dropdown-menu {
   top: 100%;
   left: 0;
   margin-top: 10px;
-  background-color: #37b24d;
+  background-color: white;
   border-radius: 4px;
+  padding: 10px 10px 10px 0px;
 }
-#header nav ul.dropdown-menu[data-bs-popper] li a {
-  color: white;
+#header nav ul.dropdown-menu li a {
+  color: #333;
 }
-#header nav ul.dropdown-menu[data-bs-popper] li a:hover {
-  background-color: #d7f0db;
+#header nav ul.dropdown-menu li a:hover {
   color: #37b24d;
+  background-color: white;
+  font-weight: 500;
 }
 #header nav ul:not(.dropdown-menu) {
   gap: 30px;
@@ -308,6 +310,7 @@ footer {
   font-weight: 500;
   font-size: 18px;
   color: #333;
+  transition: all 0.5s ease-in;
 }
 #header nav ul:not(.dropdown-menu) > li > a::before {
   content: "";
@@ -1328,6 +1331,25 @@ main .blog-section .card .card-footer .post-info .stats {
 main .blog-section .card .card-footer .post-info .stats svg {
   color: #37b24d;
   stroke-width: 1.2;
+}
+main .blog-section .blog-card {
+  /* Default state (visible) */
+  max-height: 1000px; /* IMPORTANT: Set a value larger than the max possible height of any card */
+  opacity: 1;
+  transform: translateY(0);
+  overflow: hidden; /* Crucial for max-height animation */
+  /* Transition properties applied to all changes */
+  transition: max-height 0.8s ease-out, opacity 0.8s ease-out, transform 0.8s ease-out;
+  /* Hidden state defined by a class, to be toggled by JS */
+  /* Ensure the inner card adjusts its height naturally */
+}
+main .blog-section .blog-card.blog-card--hidden {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-20px); /* Makes it slide up slightly as it hides */
+}
+main .blog-section .blog-card .card {
+  height: auto;
 }
 
 #footer .footer-section {
