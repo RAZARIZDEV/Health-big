@@ -245,6 +245,10 @@ footer {
   width: 100%;
   box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
 }
+#header nav {
+  /* Smooth dropdown override */
+  /* When dropdown is open (Bootstrap adds .show) */
+}
 #header nav.navbar-light .navbar-toggler {
   color: #d7f0db;
   position: absolute;
@@ -290,6 +294,9 @@ footer {
   background-color: white;
   border-radius: 4px;
   padding: 10px 10px 10px 0px;
+  transition: all 2s ease;
+  min-width: auto;
+  padding-right: 0;
 }
 #header nav ul.dropdown-menu li a {
   color: #333;
@@ -298,6 +305,21 @@ footer {
   color: #37b24d;
   background-color: white;
   font-weight: 500;
+}
+#header nav .dropdown-menu {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block !important; /* Keep it always in flow for transition */
+  visibility: hidden;
+  pointer-events: none;
+  height: auto !important;
+}
+#header nav .dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 #header nav ul:not(.dropdown-menu) {
   gap: 30px;
@@ -466,7 +488,7 @@ main .section-health .health-img-box .health-img.health-img--2:hover {
 }
 main .section-health .health-img-box .health-img.health-img--3 {
   z-index: 2;
-  bottom: 0;
+  bottom: 40px;
   right: 0;
 }
 main .section-health .health-img-box .health-img.health-img--3:hover {
@@ -1095,6 +1117,10 @@ main .find-a-doc-section .findDocform {
   margin-top: 30px;
   border-radius: 9px;
 }
+main .find-a-doc-section .findDocform .options {
+  top: 0px !important;
+  margin-top: 0px !important;
+}
 main .find-a-doc-section .findDocform .form-control,
 main .find-a-doc-section .findDocform .form-select {
   border-radius: 9px;
@@ -1447,7 +1473,7 @@ main .blog-section .blog-card .card {
 
 #up-arrow {
   position: fixed;
-  bottom: 10px;
+  bottom: 28px;
   right: 40px;
   width: 50px;
   height: 50px;
@@ -1514,6 +1540,11 @@ main .blog-section .blog-card .card {
   }
   main .section-health p {
     font-size: 18px;
+  }
+  main .section-health .health-img-box .health-img.health-img--3 {
+    z-index: 2;
+    bottom: 54px;
+    right: 0;
   }
   .btn {
     font-size: 16px;
@@ -1718,6 +1749,9 @@ main .blog-section .blog-card .card {
   }
 }
 @media (max-width: 768.98px) {
+  main .section-health .health-img-box {
+    margin-top: 40px;
+  }
   main .services-section .flip .card .card-body.front .learn-more-btn {
     display: none !important;
   }
@@ -2020,7 +2054,7 @@ main .blog-section .blog-card .card {
     padding: 10px 20px;
   }
   main .section-health .health-img-box {
-    display: none !important;
+    margin-top: 40px;
   }
 }
 @media (max-width: 450.98px) {
@@ -2055,5 +2089,10 @@ main .blog-section .blog-card .card {
   #up-arrow {
     right: 10px;
     height: 50px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  main .section-health {
+    padding-top: 140px !important;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -341,6 +341,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ==================== Auto Hide Dropdown Menu On Header ================================
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const dropdownToggle = document.querySelector('.nav-item.dropdown .nav-link.dropdown-toggle');
   const dropdownMenu = document.querySelector('.nav-item.dropdown .dropdown-menu');
@@ -349,15 +351,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   dropdownToggle.addEventListener('click', function (e) {
     if (window.innerWidth >= 992) {
-      e.preventDefault(); 
+      e.preventDefault();
 
-      // Toggle the dropdown menu manually
       dropdownMenu.classList.toggle('show');
 
-      // Clear previous timeout if any
       clearTimeout(hideTimeout);
 
-      // Set timeout to hide dropdown after 3 seconds
       if (dropdownMenu.classList.contains('show')) {
         hideTimeout = setTimeout(() => {
           dropdownMenu.classList.remove('show');
@@ -365,42 +364,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
+  // ✅ Close when clicking outside
+  document.addEventListener('click', function (e) {
+    const isClickInside = dropdownToggle.contains(e.target) || dropdownMenu.contains(e.target);
+
+    if (!isClickInside) {
+      dropdownMenu.classList.remove('show');
+      clearTimeout(hideTimeout);
+    }
+  });
+
+  // ✅ Close when selecting any dropdown link
+  const dropdownLinks = dropdownMenu.querySelectorAll('a');
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      dropdownMenu.classList.remove('show');
+      clearTimeout(hideTimeout);
+    });
+  });
 });
 
+
+
 // ================= Blog Post Section  ===============================
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const container = document.querySelector(".blog-section .row");
-//   const cards = container.querySelectorAll(":scope > .blog-card");
-//   const toggleBtn = document.getElementById("toggleBlogBtn");
-//   const cardsToShow = 3;
-//   let visibleCount = cardsToShow;
-
-//   function updateCardsVisibility() {
-//     cards.forEach((card, index) => {
-//       card.style.display = index < visibleCount ? "block" : "none";
-//     });
-
-//     if (cards.length <= cardsToShow) {
-//       toggleBtn.style.display = "none";
-//     } else {
-//       toggleBtn.style.display = "inline-block";
-//       toggleBtn.textContent = (visibleCount >= cards.length) ? "Show Less" : "Show More";
-//     }
-//   }
-
-//   toggleBtn.addEventListener("click", function () {
-//     if (visibleCount >= cards.length) {
-//       visibleCount = cardsToShow;
-//     } else {
-//       visibleCount = Math.min(visibleCount + cardsToShow, cards.length);
-//     }
-//     updateCardsVisibility();
-//   });
-
-//   // Initial setup
-//   updateCardsVisibility();
-// });
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -473,7 +461,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   updateCardsVisibility(); // Call to set initial button state
 });
-
 
 
 // ==================== Auto Hide Dropdown Menu On Book An Appointment Section ================================
@@ -619,15 +606,18 @@ const TestimonialsSwiper=  new Swiper(".testimonial-swiper", {
     disableOnInteraction: false,
     enabled: false,
   },
+  pagination: {
+  el: ".testimonial-swiper .swiper-pagination",
+  clickable: true,
+},
   navigation: {
     nextEl: ".testimonials-next",
     prevEl: ".testmonials-prev",
   },
   });
 
-document.querySelector(".testimonials-next").addEventListener("click", () => {
-  TestimonialsSwiper.autoplay.start();
-});
-document.querySelector(".testmonials-prev").addEventListener("click", () => {
-  TestimonialsSwiper.autoplay.start();
+document.querySelectorAll(".testimonial-swiper .swiper-pagination .swiper-pagination-bullet").forEach(bullet => {
+  bullet.addEventListener("click", () => {
+    TestimonialsSwiper.autoplay.start();
+  });
 });

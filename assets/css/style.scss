@@ -355,11 +355,16 @@ footer {
       background-color: white;
       border-radius: 4px;
       padding: 10px 10px 10px 0px;
+      // height: 0;
+      transition: all 2s ease ;
+      min-width: auto;
+      padding-right: 0;
 
       li {
         a {
           // color: white;
           color: #333;;
+          // width: auto;
           
           
           
@@ -372,6 +377,27 @@ footer {
         }
       }
     }
+
+    
+    /* Smooth dropdown override */
+.dropdown-menu {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block !important; /* Keep it always in flow for transition */
+  visibility: hidden;
+  pointer-events: none;
+  height: auto !important;
+}
+
+/* When dropdown is open (Bootstrap adds .show) */
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
 
     ul:not(.dropdown-menu) {
       gap: 30px;
@@ -613,7 +639,7 @@ main {
 
         &.health-img--3 {
           z-index: 2;
-          bottom: 0;
+          bottom: 40px;
           right: 0;
 
           &:hover {
@@ -1375,6 +1401,11 @@ main {
       margin-top: 30px;
       border-radius: 9px;
 
+      .options {
+        top: 0px !important;
+        margin-top: 0px !important;
+      } 
+
       .form-control,
       .form-select {
         border-radius: 9px;
@@ -1893,7 +1924,7 @@ main {
 
 #up-arrow {
   position: fixed;
-  bottom: 10px;
+  bottom: 28px;
   right: 40px;
   width: 50px;
   // height: 80px;
@@ -1979,7 +2010,11 @@ main {
   main .section-health p {
     font-size: 18px;
   }
-
+main .section-health .health-img-box .health-img.health-img--3 {
+    z-index: 2;
+    bottom: 54px;
+    right: 0;
+}
   .btn {
     font-size: 16px;
     padding: 10px 25px;
@@ -2246,6 +2281,11 @@ main {
 }
 
 @media (max-width: 768.98px) {
+   main .section-health .health-img-box {
+    // display: none !important;
+    // padding: 40px;
+    margin-top: 40px;
+  }
   main .services-section .flip .card .card-body.front .learn-more-btn {
     display: none !important;
   }
@@ -2700,7 +2740,9 @@ main {
   }
 
   main .section-health .health-img-box {
-    display: none !important;
+    // display: none !important;
+    // padding: 40px;
+    margin-top: 40px;
   }
 
   // main .section-health .heading-primary {
@@ -2751,5 +2793,11 @@ main {
   #up-arrow {
     right: 10px;
     height: 50px;
+  }
+}
+
+@media screen and (min-width:1400px){
+  main .section-health {
+    padding-top: 140px !important;
   }
 }
