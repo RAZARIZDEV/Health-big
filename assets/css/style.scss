@@ -1046,6 +1046,49 @@ main {
     padding: 90px 0;
     background-color: #d7f0db;
 
+
+
+    .options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  right: 0;
+  background-color: #37b24d;
+  border-radius: 4px;
+  display: none;
+
+  font-size: 16px;
+  z-index: 5;
+  padding: 5px 0;
+
+  border-radius: 4px;
+  display: block;
+   opacity: 0;
+   max-height: 0px;
+  visibility: hidden;
+  transition: all 0.6s ease-in-out;
+
+}
+.options.show-drop{
+  opacity: 1;
+  visibility: visible;
+  max-height: 140px;
+
+}
+.options.hide-drop{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+
+  font-size: 16px;
+}
+
     .btn-outline {
       width: 215px;
       justify-content: flex-start;
@@ -1372,6 +1415,9 @@ main {
     padding: 50px 0;
     background-color: #d7f0db;
 
+
+    
+
     h1,
     p {
       text-align: center;
@@ -1405,6 +1451,38 @@ main {
         top: 0px !important;
         margin-top: 0px !important;
       } 
+        .options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  right: 0;
+  background-color: #37b24d;
+  border-radius: 4px;
+  display: none;
+
+  font-size: 16px;
+  z-index: 5;
+  padding: 5px 0;
+
+  border-radius: 4px;
+  display: block;
+   opacity: 0;
+   max-height: 0px;
+  visibility: hidden;
+  transition: all 0.6s ease-in-out;
+
+}
+.options.show-drop{
+  opacity: 1;
+  visibility: visible;
+  max-height: 140px;
+
+}
+.options.hide-drop{
+  opacity: 0;
+  visibility: hidden;
+}
 
       .form-control,
       .form-select {
@@ -2801,3 +2879,25 @@ main .section-health .health-img-box .health-img.health-img--3 {
     padding-top: 140px !important;
   }
 }
+
+  // .custom-select .options {
+  //     /* Initial hidden state properties for animation */
+  //     max-height: 0;           /* Collapsed height */
+  //     opacity: 0;              /* Fully transparent */
+  //     overflow: hidden;        /* Hides content that exceeds max-height */
+  //     transform: translateY(10px); /* Starts 10px below its final position */
+      
+  //     /* Define the transition for these properties */
+  //     transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+
+  //     /* Added to visually hide content when not 'show' */
+  //     visibility: hidden; 
+  //   }
+
+  //   .custom-select .options.show {
+  //     /* Target visible state properties */
+  //     max-height: 200px; /* Needs to be a value large enough to show all options */
+  //     opacity: 1;              /* Fully opaque */
+  //     transform: translateY(0); /* Moves to its original position */
+  //     visibility: visible; /* Make visible when 'show' class is present */
+  //   }

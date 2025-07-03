@@ -233,34 +233,42 @@ document.addEventListener("DOMContentLoaded", function () {
   });
  
 
-  document.querySelectorAll(".custom-select").forEach((select) => {
-    const selected = select.querySelector(".selected");
-    const options = select.querySelector(".options");
-    const optionItems = select.querySelectorAll(".option");
+document.querySelectorAll(".custom-select").forEach((select) => {
+  const selected = select.querySelector(".selected");
+  const options = select.querySelector(".options");
+  const optionItems = select.querySelectorAll(".option");
 
-    selected.addEventListener("click", (e) => {
-      document.querySelectorAll(".options").forEach((opt) => {
-        if (opt !== options) opt.style.display = "none";
-      });
-      options.style.display =
-        options.style.display === "block" ? "none" : "block";
+  selected.addEventListener("click", (e) => {
+    document.querySelectorAll(".options").forEach((opt) => {
+      if (opt !== options) {
+        opt.classList.remove("show-drop");
+      }
+    });
+
+    // Toggle the "show-drop" class on the current dropdown's options
+    options.classList.toggle("show-drop");
+    e.stopPropagation();
+  });
+
+  optionItems.forEach((option) => {
+    option.addEventListener("click", (e) => {
+      selected.textContent = option.textContent;
+      // Remove the "show-drop" class when an option is selected
+      options.classList.remove("show-drop");
       e.stopPropagation();
     });
-
-    optionItems.forEach((option) => {
-      option.addEventListener("click", (e) => {
-        selected.textContent = option.textContent;
-        options.style.display = "none";
-        e.stopPropagation();
-      });
-    });
   });
+});
 
-  document.addEventListener("click", () => {
-    document
-      .querySelectorAll(".options")
-      .forEach((opt) => (opt.style.display = "none"));
-  });
+
+
+  // document.addEventListener("click", () => {
+  //   document
+  //     .querySelectorAll(".options")
+  //     .forEach((opt) => (opt.classList.add("hide-drop")));
+  //     // .forEach((opt) => (opt.style.display = "none"));
+  // });
+
 });
 
 // =====================================================================================================================================
@@ -400,6 +408,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let visibleCount = cardsToShow;
 
+
+
   function updateCardsVisibility() {
     cards.forEach((card, index) => {
       if (index < visibleCount) {
@@ -477,23 +487,30 @@ document.addEventListener("DOMContentLoaded", function () {
     let hideTimeout;
 
     selected.addEventListener("click", function () {
-      options.style.display = "block";
+      // options.style.display = "block";
+      options.classList.add("show-drop");
+      
 
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(function () {
-        options.style.display = "none";
+        // options.style.display = "none";
+        options.classList.remove("show-drop");
       }, 2600);
     });
 
     customSelect.querySelectorAll(".option").forEach(option => {
       option.addEventListener("click", function () {
         selected.textContent = this.textContent;
-        options.style.display = "none";
+        // options.style.display = "none";
+         options.classList.remove("show-drop");
         clearTimeout(hideTimeout);
       });
     });
   });
 });
+
+
+
 
 // ==================== Auto Hide Dropdown Menu On Find A Doc Section ================================
 
@@ -507,14 +524,16 @@ document.addEventListener("DOMContentLoaded", function () {
   let hideTimeout;
 
   selected.addEventListener("click", function () {
-    options.style.display = "block";
+    // options.style.display = "block";
+    options.classList.add("show-drop");
 
     // Clear any existing timeout
     clearTimeout(hideTimeout);
 
     // Hide after 2 seconds
     hideTimeout = setTimeout(function () {
-      options.style.display = "none";
+      // options.style.display = "none";
+         options.classList.remove("show-drop");
     }, 2600);
   });
 
@@ -522,7 +541,8 @@ document.addEventListener("DOMContentLoaded", function () {
   customSelect.querySelectorAll(".option").forEach(option => {
     option.addEventListener("click", function () {
       selected.textContent = this.textContent;
-      options.style.display = "none";
+      // options.style.display = "none";
+         options.classList.remove("show-drop");
       clearTimeout(hideTimeout);
     });
   });
@@ -570,7 +590,7 @@ const pricingSwiper = new Swiper(".pricing-swiper", {
   allowTouchMove: true,
  speed: 2200,
   autoplay: {
-    delay: 2400,
+    delay: 2600,
     disableOnInteraction: false,
     enabled: false,
   },

@@ -827,6 +827,40 @@ main .appointment-form-section {
   padding: 90px 0;
   background-color: #d7f0db;
 }
+main .appointment-form-section .options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  right: 0;
+  background-color: #37b24d;
+  border-radius: 4px;
+  display: none;
+  font-size: 16px;
+  z-index: 5;
+  padding: 5px 0;
+  border-radius: 4px;
+  display: block;
+  opacity: 0;
+  max-height: 0px;
+  visibility: hidden;
+  transition: all 0.6s ease-in-out;
+}
+main .appointment-form-section .options.show-drop {
+  opacity: 1;
+  visibility: visible;
+  max-height: 140px;
+}
+main .appointment-form-section .options.hide-drop {
+  opacity: 0;
+  visibility: hidden;
+}
+main .appointment-form-section .option {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
 main .appointment-form-section .btn-outline {
   width: 215px;
   justify-content: flex-start;
@@ -1120,6 +1154,34 @@ main .find-a-doc-section .findDocform {
 main .find-a-doc-section .findDocform .options {
   top: 0px !important;
   margin-top: 0px !important;
+}
+main .find-a-doc-section .findDocform .options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  right: 0;
+  background-color: #37b24d;
+  border-radius: 4px;
+  display: none;
+  font-size: 16px;
+  z-index: 5;
+  padding: 5px 0;
+  border-radius: 4px;
+  display: block;
+  opacity: 0;
+  max-height: 0px;
+  visibility: hidden;
+  transition: all 0.6s ease-in-out;
+}
+main .find-a-doc-section .findDocform .options.show-drop {
+  opacity: 1;
+  visibility: visible;
+  max-height: 140px;
+}
+main .find-a-doc-section .findDocform .options.hide-drop {
+  opacity: 0;
+  visibility: hidden;
 }
 main .find-a-doc-section .findDocform .form-control,
 main .find-a-doc-section .findDocform .form-select {
