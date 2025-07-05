@@ -844,7 +844,7 @@ main .appointment-form-section .options {
   opacity: 0;
   max-height: 0px;
   visibility: hidden;
-  transition: all 0.6s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 main .appointment-form-section .options.show-drop {
   opacity: 1;
@@ -1172,7 +1172,7 @@ main .find-a-doc-section .findDocform .options {
   opacity: 0;
   max-height: 0px;
   visibility: hidden;
-  transition: all 0.6s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 main .find-a-doc-section .findDocform .options.show-drop {
   opacity: 1;
@@ -1427,7 +1427,7 @@ main .blog-section .blog-card {
   transform: translateY(0);
   overflow: hidden; /* Crucial for max-height animation */
   /* Transition properties applied to all changes */
-  transition: max-height 0.8s ease-out, opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: max-height 2s ease-out, opacity 2s ease-out, transform 2s ease-out;
   /* Hidden state defined by a class, to be toggled by JS */
   /* Ensure the inner card adjusts its height naturally */
 }
@@ -1535,7 +1535,7 @@ main .blog-section .blog-card .card {
 
 #up-arrow {
   position: fixed;
-  bottom: 28px;
+  bottom: 52px;
   right: 40px;
   width: 50px;
   height: 50px;
@@ -1778,6 +1778,9 @@ main .blog-section .blog-card .card {
   #header nav ul.dropdown-menu[data-bs-popper] li a {
     display: flex;
     justify-content: center;
+  }
+  #up-arrow {
+    bottom: 28px !important;
   }
 }
 .fade-out {

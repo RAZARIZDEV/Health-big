@@ -1,3 +1,7 @@
+ // ====================================================================================
+  // ======================      Sticky Header     =====================================
+  // ====================================================================================
+
 const header = document.getElementById("header");
 const hero = document.querySelector(".section-health");
 
@@ -35,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
     toggler.classList.toggle("opened");
   });
 
+
+  // ======== MObile imags on Hero Section ==========
   const headerSwiper = new Swiper(".header-swiper", {
     slidesPerView: 3, // Important: 'auto' allows flexible number of slides
     spaceBetween: 0,
@@ -57,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
   });
+// =========================== End ============
+
 
   function scaleMiddleSlide(swiper) {
     // Remove from all
@@ -73,6 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+
+  // ====================================================================================
+  // ======================     Featured Swiper     =====================================
+  // ====================================================================================
 
   new Swiper(".featured-swiper", {
     slidesPerView: 4, // Important: 'auto' allows flexible number of slides
@@ -100,7 +112,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-
+ // ====================================================================================
+  // ======================    Flip Cards     =====================================
+  // ====================================================================================
 
   const flips = document.querySelectorAll(".flip");
 
@@ -124,21 +138,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const card = flip.querySelector(".card");
     const learnMoreBtn = flip.querySelector(".learn-more-btn");
 
-    if (window.innerWidth >= 992) {
-      // Desktop: hover to flip
-      flip.addEventListener("mouseenter", () => card.classList.add("flipped"));
-      flip.addEventListener("mouseleave", () =>
-        card.classList.remove("flipped")
-      );
-    } else if (window.innerWidth >= 576) {
+    // if (window.innerWidth >= 992) {
+    //   // Desktop: hover to flip
+    //   flip.addEventListener("mouseenter", () => card.classList.add("flipped"));
+    //   flip.addEventListener("mouseleave", () =>
+    //     card.classList.remove("flipped")
+    //   );
+    // } 
+     if (window.innerWidth >= 576) {
       // Tablet: click to flip/unflip
       if (!learnMoreBtn) return;
 
+
+      // ============== Old Logic ============== 
+      // learnMoreBtn.addEventListener("click", (e) => {
+      //   e.stopPropagation(); // prevent immediate document click
+      //   learnMoreBtn.style.opacity = "0"; // hide the button
+      //   setTimeout(() => card.classList.add("flipped"), 200);
+      // });
+// ==================== End ============
+
+
+
       learnMoreBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // prevent immediate document click
-        learnMoreBtn.style.opacity = "0"; // hide the button
-        setTimeout(() => card.classList.add("flipped"), 200);
-      });
+  e.stopPropagation();
+
+  // Flip back all other flipped cards first
+  flips.forEach((otherFlip) => {
+    const otherCard = otherFlip.querySelector(".card");
+    const otherBtn = otherFlip.querySelector(".learn-more-btn");
+    if (otherCard !== card && otherCard.classList.contains("flipped")) {
+      otherCard.classList.remove("flipped");
+      if (otherBtn) otherBtn.style.opacity = "1";
+    }
+  });
+
+  // Then flip the current card
+  learnMoreBtn.style.opacity = "0";
+  setTimeout(() => card.classList.add("flipped"), 200);
+});
+
+
+
 
       document.addEventListener("click", (e) => {
         if (!flip.contains(e.target) && card.classList.contains("flipped")) {
@@ -154,7 +195,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+ // ====================================================================================
+  // ======================      Back To Top Button    =================================
+  // ====================================================================================
   const goTopButton = document.getElementById("up-arrow");
 
   // Show button when user scrolls down 300px
@@ -262,13 +305,6 @@ document.querySelectorAll(".custom-select").forEach((select) => {
 
 
 
-  // document.addEventListener("click", () => {
-  //   document
-  //     .querySelectorAll(".options")
-  //     .forEach((opt) => (opt.classList.add("hide-drop")));
-  //     // .forEach((opt) => (opt.style.display = "none"));
-  // });
-
 });
 
 // =====================================================================================================================================
@@ -347,10 +383,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
+
 // ==================== Auto Hide Dropdown Menu On Header ================================
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
   const dropdownToggle = document.querySelector('.nav-item.dropdown .nav-link.dropdown-toggle');
   const dropdownMenu = document.querySelector('.nav-item.dropdown .dropdown-menu');
@@ -396,8 +431,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// ================= Blog Post Section  ===============================
-
+ // ====================================================================================
+  // ======================       Blog Sectoin     =====================================
+  // ====================================================================================
 
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.querySelector(".blog-section .row");
@@ -407,39 +443,36 @@ document.addEventListener("DOMContentLoaded", function () {
   const transitionDuration = 800; // Must match the CSS transition duration in milliseconds (0.8s = 800ms)
 
   let visibleCount = cardsToShow;
-
-
-
-  function updateCardsVisibility() {
-    cards.forEach((card, index) => {
-      if (index < visibleCount) {
-        // SHOW CARD:
-        // 1. Make it display: block immediately so it occupies space.
-        card.style.display = "block";
-        // 2. A tiny delay is often needed to ensure the browser registers the display change
-        //    before the transition properties are applied.
-        setTimeout(() => {
-          card.classList.remove("blog-card--hidden"); // Remove hidden class to trigger show animation
-        }, 10); // Small delay, e.g., 10ms
-      } else {
-        // HIDE CARD:
-        // 1. Add the hidden class first to trigger the hide animation.
-        card.classList.add("blog-card--hidden");
-        // 2. After the transition completes, set display to 'none' to remove it from layout.
-        setTimeout(() => {
-          card.style.display = "none";
-        }, transitionDuration); // Wait for the animation to finish
-      }
-    });
-
-    // Update button text and visibility
-    if (cards.length <= cardsToShow) {
-      toggleBtn.style.display = "none";
+let firstLoad = true;
+function updateCardsVisibility() {
+  cards.forEach((card, index) => {
+    if (index < visibleCount) {
+      // SHOW CARD
+      card.style.display = "block"; // Ensure it's visible (only needed for first load)
+      setTimeout(() => {
+        card.classList.remove("blog-card--hidden");
+      }, 10); // Allow browser to register display
     } else {
-      toggleBtn.style.display = "inline-block";
-      toggleBtn.textContent = visibleCount >= cards.length ? "Show Less" : "Show More";
+      if (firstLoad) {
+        // On first load, immediately hide with no animation
+        card.style.display = "none";
+      } else {
+        // HIDE with animation
+        card.classList.add("blog-card--hidden");
+      }
     }
+  });
+
+  firstLoad = false; // Now we only animate
+
+  // Update button text and visibility
+  if (cards.length <= cardsToShow) {
+    toggleBtn.style.display = "none";
+  } else {
+    toggleBtn.style.display = "inline-block";
+    toggleBtn.textContent = visibleCount >= cards.length ? "Show Less" : "Show More";
   }
+}
 
   toggleBtn.addEventListener("click", function () {
     // Disable button temporarily to prevent rapid clicks during transition
@@ -463,17 +496,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial setup: Hide cards beyond the initial count on page load
   // We need to apply the 'hidden' class immediately for initial state
+
   cards.forEach((card, index) => {
     if (index >= cardsToShow) {
       card.classList.add("blog-card--hidden");
-      card.style.display = "none"; // Ensure they are initially hidden from layout
+      // card.style.display = "none"; 
     }
   });
   updateCardsVisibility(); // Call to set initial button state
 });
 
 
+
+// ====================================================================================
 // ==================== Auto Hide Dropdown Menu On Book An Appointment Section ================================
+// ====================================================================================
 
 document.addEventListener("DOMContentLoaded", function () {
   const appointmentSection = document.querySelector("#appointment-cta");
@@ -512,7 +549,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// ==================== Auto Hide Dropdown Menu On Find A Doc Section ================================
+// ====================================================================================
+// ================ Auto Hide Dropdown Menu On Find A Doc Section =====================
+// ====================================================================================
 
 document.addEventListener("DOMContentLoaded", function () {
   const section = document.querySelector("#find-doctor-cta");
@@ -548,7 +587,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+
+// ====================================================================================
 // ======================= Auto Scroll when click on Navigation Arrow =================
+// ====================================================================================
 
 // Doctors Swiper
 const doctorsSwiper = new Swiper(".doctors-swiper", {
@@ -559,7 +602,7 @@ const doctorsSwiper = new Swiper(".doctors-swiper", {
   allowTouchMove: true,
   speed: 2200,
   autoplay: {
-    delay: 2400,
+    delay: 2600,
     disableOnInteraction: false,
     enabled: false,
   },
@@ -620,9 +663,9 @@ const TestimonialsSwiper=  new Swiper(".testimonial-swiper", {
   loop: true,
   grabCursor: true,
   allowTouchMove: true,
- speed: 2200,
+ speed: 3000,
   autoplay: {
-    delay: 2400,
+    delay: 3200,
     disableOnInteraction: false,
     enabled: false,
   },

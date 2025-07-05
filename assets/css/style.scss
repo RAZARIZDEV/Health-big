@@ -1067,7 +1067,7 @@ main {
    opacity: 0;
    max-height: 0px;
   visibility: hidden;
-  transition: all 0.6s ease-in-out;
+  transition: all 1s ease-in-out;
 
 }
 .options.show-drop{
@@ -1470,7 +1470,7 @@ main {
    opacity: 0;
    max-height: 0px;
   visibility: hidden;
-  transition: all 0.6s ease-in-out;
+  transition: all 1s ease-in-out;
 
 }
 .options.show-drop{
@@ -1868,7 +1868,7 @@ main {
     transform: translateY(0);
     overflow: hidden; /* Crucial for max-height animation */
     /* Transition properties applied to all changes */
-    transition: max-height 0.8s ease-out, opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: max-height 2s ease-out, opacity 2s ease-out, transform 2s ease-out;
 
     /* Hidden state defined by a class, to be toggled by JS */
     &.blog-card--hidden {
@@ -2002,7 +2002,7 @@ main {
 
 #up-arrow {
   position: fixed;
-  bottom: 28px;
+  bottom: 52px;
   right: 40px;
   width: 50px;
   // height: 80px;
@@ -2321,6 +2321,9 @@ main .section-health .health-img-box .health-img.health-img--3 {
     display: flex;
     justify-content: center;
   }
+  #up-arrow {
+  bottom: 28px !important; 
+  }
 }
 
 .fade-out {
@@ -2350,7 +2353,7 @@ main .section-health .health-img-box .health-img.health-img--3 {
   }
 
   .card-body.back .learn-more-btn {
-    display: none;
+    display: none; 
   }
 
   main .section-health .header-swiper {
